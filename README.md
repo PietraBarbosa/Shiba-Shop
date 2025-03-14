@@ -37,8 +37,8 @@ Facilita manter num repositório NoSQL todos os dados que podem sofrer alteraç�
 ### Arquitetura Geral
 A arquitetura proposta segue o modelo:
 
-S1 -> Mensageria -> S2 -> {DB1, DB2, RDB}
-                -> S3 (armazenamento de logs e mensagens)
+![image](https://github.com/user-attachments/assets/b6e10013-7814-4f7e-9e65-59b810bf615d)
+
                 
 **S1: Serviço que gera mensagens. Esse serviço envia:**
 
