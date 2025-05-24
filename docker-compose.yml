@@ -13,12 +13,14 @@ services:
     ports:
       - "4566:4566"
     environment:
-      - SERVICES=sqs
+      - SERVICES=sqs,dynamodb
       - EDGE_PORT=4566
       - AWS_ACCESS_KEY_ID=test
       - AWS_SECRET_ACCESS_KEY=test
     volumes:
       - ./run-local/localstack/create-queue.sh:/etc/localstack/init/ready.d/init-queues.sh
+    command: >
+      bash -c "chmod +x /etc/localstack/init/ready.d/init-queues.sh && /opt/code/localstack/entrypoint.sh"
 
   postgres:
     image: postgres:15

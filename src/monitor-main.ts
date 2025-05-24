@@ -40,7 +40,7 @@ async function bootstrap() {
   server.use("/admin/queues", bullBoardAdapter.getRouter());
 
   const loggerService = app.get(MessageLoggerService);
-  createMonitorWorker(loggerService); // Worker de persistência no Redis
+  createMonitorWorker(loggerService);
 
   await app.listen(3002);
   console.log(`Monitor listening on http://localhost:3002`);

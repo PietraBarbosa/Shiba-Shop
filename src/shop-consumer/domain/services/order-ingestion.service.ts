@@ -1,24 +1,35 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { OrderRepository } from "@/shop-consumer/domain/repositories";
+import { Order } from "@/infrastructure/dynamodb/schemas";
+import { randomUUID } from "crypto";
 
 @Injectable()
 export class OrderIngestionService {
-  private readonly logger = new Logger(OrderIngestionService.name);
+  constructor(private readonly orderRepo: OrderRepository) {}
 
-  constructor(private readonly repository: OrderRepository) {}
+  async create(order: Order): Promise<void> {
+    const payload = {
+      ...order,
+      id: randomUUID(),
+      createdAt: new Date().toISOString(),
+    };
 
-  async create(payload: any): Promise<void> {
-    this.logger.log(`Criando pedido: ${JSON.stringify(payload)}`);
-    await this.repository.create(payload);
+    await this.orderRepo.create(payload);
   }
 
-  async update(payload: any): Promise<void> {
-    this.logger.log(`Atualizando pedido: ${JSON.stringify(payload)}`);
-    await this.repository.update(payload.id, payload);
+  async getById(id: string): Promise<Order | null> {
+    return this.orderRepo.findById(id);
   }
 
-  async delete(payload: any): Promise<void> {
-    this.logger.log(`Deletando pedido: ${payload.id}`);
-    await this.repository.delete(payload.id);
+  async update(
+    id: Record<string, string>,
+    updates: Partial<Order>,
+  ): Promise<void> {
+    if (updates.id) delete updates["id"];
+    await this.orderRepo.update(id, updates);
+  }
+
+  async delete(id: Record<string, string>): Promise<void> {
+    await this.orderRepo.delete(id);
   }
 }

@@ -45,6 +45,8 @@
     "start:monitor:prod": "node dist/monitor-main.js"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "3.817.0",
+    "@aws-sdk/util-dynamodb": "3.817.0",
     "@bull-board/api": "6.9.6",
     "@bull-board/express": "6.9.6",
     "@bull-board/nestjs": "6.9.6",
@@ -59,6 +61,7 @@
     "@nestjs/platform-express": "11.1.1",
     "@nestjs/typeorm": "11.0.0",
     "@ssut/nestjs-sqs": "3.0.1",
+    "aws-sdk": "2.1692.0",
     "bull-board": "1.7.2",
     "bullmq": "5.53.0",
     "class-transformer": "0.5.1",
