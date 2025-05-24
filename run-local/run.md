@@ -11,8 +11,11 @@ Este projeto utiliza Redis, LocalStack (SQS + DynamoDB), MongoDb e Postgres.
 
 ```bash
 docker-compose up --build
-🧼 Como parar o ambiente
-bash
+```
+
+## 🧼 Como parar o ambiente
+
+```bash
 Copiar
 Editar
 docker-compose down
@@ -30,6 +33,10 @@ awslocal dynamodb create-table \
   --billing-mode PAYPERREQUEST \
   --region us-east-1
 ```
+
+Caso o comando awslocal não rodar, é possivel criar a tabela manualmente no localstack, acessando o link: https://app.localstack.cloud/inst/default/resources/dynamodb e clickando em "Create Table".
+
+O mesmo pode ser aplicado para as filas, em caso de o .sh der problema
 
 ##✅ Esse comando usa o modo PAYPERREQUEST, ideal para testes e ambientes locais, pois não exige configuração de throughput.
 
