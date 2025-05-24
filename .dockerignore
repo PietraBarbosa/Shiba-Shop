@@ -1,0 +1,4 @@
+# output folders
+/node_modules
+.git
+.vscode

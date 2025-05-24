@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["node_modules", "tests", "dist", "*jest*"],
+  "include": [
+    "bff-main.ts",
+    "consumer-main.ts",
+    "monitor-main.ts",
+    "src/**/*.ts"
+  ]
+}
