@@ -1,0 +1,11 @@
+export enum SQS_MESSAGE_TYPES_ENUM {
+  USER = "USER",
+  PRODUCT = "PRODUCT",
+  ORDER = "ORDER",
+}
+
+export enum SQS_MESSAGE_OPERATIONS_ENUM {
+  CREATE = "CREATE",
+  DELETE = "DELETE",
+  UPDATE = "UPDATE",
+}

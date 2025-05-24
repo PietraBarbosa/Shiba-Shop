@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "watchAssets": true
+  },
+  "entryFile": "bff-main",
+  "projects": {
+    "bff-main": {
+      "type": "application",
+      "entryFile": "bff-main"
+    },
+    "consumer-main": {
+      "type": "application",
+      "entryFile": "consumer-main"
+    },
+    "monitor-main": {
+      "type": "application",
+      "entryFile": "monitor-main"
+    }
+  }
+}
