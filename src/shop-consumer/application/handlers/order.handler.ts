@@ -20,7 +20,7 @@ export class OrderHandler implements ICommandHandler<ProcessOrderCommand> {
         await this.ingestionService.create(payload);
         break;
       case SQS_MESSAGE_OPERATIONS_ENUM.UPDATE:
-        await this.ingestionService.update(payload);
+        await this.ingestionService.update(payload.id, payload);
         break;
       case SQS_MESSAGE_OPERATIONS_ENUM.DELETE:
         await this.ingestionService.delete(payload);

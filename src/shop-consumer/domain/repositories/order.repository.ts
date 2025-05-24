@@ -1,17 +1,29 @@
-import { MongoClient } from "@/infrastructure/mongodb";
-import { Order } from "@/infrastructure/mongodb/schemas";
-import { Injectable, Logger } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { Injectable } from "@nestjs/common";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { Order } from "@/infrastructure/dynamodb/schemas";
+import { DynamoClient } from "@/infrastructure/dynamodb";
 
 @Injectable()
-export class OrderRepository extends MongoClient<Order> {
-  private readonly logger = new Logger(OrderRepository.name);
+export class OrderRepository {
+  private readonly client: DynamoClient<Order>;
 
-  constructor(
-    @InjectModel(Order.name)
-    model: Model<Order>,
-  ) {
-    super(model);
+  constructor(dynamo: DynamoDBClient) {
+    this.client = new DynamoClient<Order>(dynamo, "OrderTable");
+  }
+
+  async create(order: Order) {
+    return this.client.put(order);
+  }
+
+  async findById(id: string) {
+    return this.client.getByKey({ id });
+  }
+
+  async update(id: Record<string, string>, updates: Partial<Order>) {
+    return this.client.update({ id }, updates);
+  }
+
+  async delete(id: Record<string, string>) {
+    return this.client.delete(id);
   }
 }
